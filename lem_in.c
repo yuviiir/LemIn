@@ -96,7 +96,11 @@ void			lem_in(t_map *map)
 	map->start->parent_room = map->start;
 	add_to_queue(queue, map->start);
 	if (!find_shortest_path(queue, map->end))
+	{
+		free_everything(map);
+		free(queue);
 		error();
+	}
 	print_map(map);
 	ft_putchar('\n');
 	paths(map->start, map->end);

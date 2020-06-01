@@ -6,10 +6,19 @@ t_room *add_rooms(t_map *map, char *line)
 	char **arr;
 
 	if (line[0] == ' ')
+	{
+		free_everything(map);
+		free(line);
 		error();
+	}
 	arr = ft_strsplit(line, ' ');
 	if (arr_size(arr) != 3)
+	{
+		free_everything(map);
+		free(line);
+		free(arr);
 		error();
+	}
 	room = add_room(map, arr);
 	if (!room)
 		free(line);
@@ -24,7 +33,12 @@ int	add_links(t_map *map, char *line)
 	res = 0;
 	temp = ft_strsplit(line, '-');
 	if (arr_size(temp) != 2)
+	{
+		free_everything(map);
+		free(line);
+		free(temp);
 		error();
+	}
 	res = link_rooms(map, temp);
 	free(line);
 	return (res);

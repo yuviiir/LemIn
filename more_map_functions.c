@@ -5,7 +5,10 @@ t_room *make_room(char **arr)
 	t_room *room;
 
 	if (!(room = ft_memalloc(sizeof(t_room))))
+	{
+		free(arr);
 		error();
+	}
 	room->name = arr[0];
 	if (!set_num(arr[1], &room->pos_x) || !set_num(arr[2], &room->pos_y))
 	{
@@ -47,7 +50,13 @@ t_room *add_room(t_map *map, char **arr)
 	}
 	tmp = map->rooms;
 	if (!(map->rooms = ft_memalloc(sizeof(t_room) * (map->num_rooms + 1))))
+	{
+		free_everything(map);
+		free(room);
+		free(arr);
+		free(tmp);
 		error();
+	}
 	ft_memcpy(map->rooms, tmp, sizeof(t_room) * map->num_rooms);
 	room->room_id = map->num_rooms;
 	map->rooms[map->num_rooms++] = room;
