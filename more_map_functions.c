@@ -61,7 +61,6 @@ t_room *add_room(t_map *map, char **arr)
 	room->room_id = map->num_rooms;
 	map->rooms[map->num_rooms++] = room;
 	free(tmp);
-	free(arr);
 	return (room);
 }
 
@@ -102,6 +101,5 @@ int link_rooms(t_map *map, char **arr)
 	}
 	add_link(a, b);
 	add_link(b, a);
-	free(arr);
 	return (1);
 }

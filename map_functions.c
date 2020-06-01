@@ -22,6 +22,7 @@ t_room *add_rooms(t_map *map, char *line)
 	room = add_room(map, arr);
 	if (!room)
 		free(line);
+	free(arr);
 	return (room);
 }
 
@@ -41,6 +42,7 @@ int	add_links(t_map *map, char *line)
 	}
 	res = link_rooms(map, temp);
 	free(line);
+	free(temp);
 	return (res);
 }
 
@@ -88,7 +90,10 @@ void read_map(t_map *map)
 	while (get_next_line(0, &line) > 0)
 	{
 		if (map->ants == 0 && set_num(line, &map->ants))
+		{
 			set_num(line, &map->ants);
+			free(line);
+		}
 		else if (*line == '#' && map->ants)
 			res = add_command(map, line);
 		else
