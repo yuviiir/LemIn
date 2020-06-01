@@ -53,7 +53,7 @@ char	*ft_stpcpy(char *s1, const char *s2);
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 
-char		**ft_strsplit(char *raw, char delim);
+char	**ft_strsplit(char *raw, char delim);
 
 int		get_next_line(const int fd, char **line);
 

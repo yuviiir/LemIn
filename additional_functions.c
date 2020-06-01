@@ -18,7 +18,8 @@ void free_everything(t_map *map)
 	while (i < map->num_rooms)
 	{
 		free(map->rooms[i]->links);
-		free(map->rooms[i++]);
+		free(map->rooms[i]);
+		i++;
 	}
 	free(map->rooms);
 }

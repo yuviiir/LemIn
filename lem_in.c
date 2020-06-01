@@ -23,7 +23,6 @@ int	find_shortest_path(t_queue *queue, t_room *end)
 	}
 	while (queue->start)
 		remove_from_queue(queue);
-	free(queue);
 	return (room == end);
 }
 
@@ -40,6 +39,7 @@ void		paths(t_room *start, t_room *end)
 void		move_ants(t_queue *queue)
 {
 	t_ant	*ant;
+	void 	*tmp;
 	t_node	*node;
 	t_node	*next;
 
@@ -54,7 +54,10 @@ void		move_ants(t_queue *queue)
 		write(1, ant->room->name, ft_strlen(ant->room->name));
 		next = node->next;
 		if (!ant->room->links[0])
-			free(remove_from_queue(queue));
+		{
+			tmp = remove_from_queue(queue);
+			free(tmp);
+		}
 		if ((node = next))
 			write(1, " ", 1);
 	}
@@ -81,7 +84,6 @@ void		move(t_map *map)
 		if (queue->start)
 			move_ants(queue);
 	}
-	free(ant);
 	free(queue);
 	free(ant);
 }
